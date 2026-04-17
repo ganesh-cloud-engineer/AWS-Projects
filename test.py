@@ -1,30 +1,56 @@
-# Simple Calculator
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
 
-num1 = float(input("Enter first number: "))
-num2 = float(input("Enter second number: "))
+    <h1>Calculator</h1>
 
-print("Select operation:")
-print("1. Add")
-print("2. Subtract")
-print("3. Multiply")
-print("4. Divide")
+    <input type="number" id="num1" placeholder="First number">
+    <input type="number" id="num2" placeholder="Second number">
+    <br>
 
-choice = input("Enter choice (1/2/3/4): ")
+    <button onclick="calculate('+')">Add</button>
+    <button onclick="calculate('-')">Subtract</button>
+    <button onclick="calculate('*')">Multiply</button>
+    <button onclick="calculate('/')">Divide</button>
 
-if choice == '1':
-    print("Result:", num1 + num2)
+    <h2 id="result">Result: </h2>
 
-elif choice == '2':
-    print("Result:", num1 - num2)
+    <script>
+        function calculate(op) {
+            let n1 = parseFloat(document.getElementById("num1").value);
+            let n2 = parseFloat(document.getElementById("num2").value);
+            let res;
 
-elif choice == '3':
-    print("Result:", num1 * num2)
+            if (isNaN(n1) || isNaN(n2)) {
+                res = "Enter valid numbers";
+            } else {
+                if (op === '+') res = n1 + n2;
+                else if (op === '-') res = n1 - n2;
+                else if (op === '*') res = n1 * n2;
+                else if (op === '/') {
+                    if (n2 === 0) res = "Cannot divide by zero";
+                    else res = n1 / n2;
+                }
+            }
 
-elif choice == '4':
-    if num2 != 0:
-        print("Result:", num1 / num2)
-    else:
-        print("Error: Division by zero")
+            document.getElementById("result").innerText = "Result: " + res;
+        }
+    </script>
 
-else:
-    print("Invalid input")
+</body>
+</html>
